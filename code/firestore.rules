@@ -1,0 +1,320 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function staffProfile() {
+      return get(/databases/$(database)/documents/staff_by_uid/$(request.auth.uid));
+    }
+
+    function isActiveStaff() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/staff_by_uid/$(request.auth.uid))
+        && staffProfile().data.is_active == true
+        && staffProfile().data.role != 'citizen';
+    }
+
+    function hasRole(roles) {
+      return isActiveStaff() && staffProfile().data.role in roles;
+    }
+
+    function canManageCms() {
+      return hasRole(['super_admin', 'chairman', 'lcda_secretary', 'hod', 'digital_champion']);
+    }
+
+    function canManageStaff() {
+      return hasRole(['super_admin', 'chairman', 'lcda_secretary']);
+    }
+
+    function canProcessApplications() {
+      return hasRole(['super_admin', 'chairman', 'lcda_secretary', 'hod', 'department_staff']);
+    }
+
+    function canProcessServiceRequests() {
+      return hasRole(['super_admin', 'chairman', 'lcda_secretary', 'hod', 'department_staff', 'digital_champion']);
+    }
+
+    function publicMarriageApplicationKeys() {
+      return [
+        'id',
+        'application_number',
+        'status',
+        'fee_amount',
+        'fee_paid',
+        'submitted_at',
+        'created_at',
+        'updated_at',
+        'groom_surname',
+        'groom_first_name',
+        'groom_other_names',
+        'groom_dob',
+        'groom_place_of_birth',
+        'groom_occupation',
+        'groom_address',
+        'groom_phone',
+        'groom_email',
+        'groom_state_of_origin',
+        'groom_lga',
+        'groom_father_name',
+        'groom_mother_name',
+        'groom_marital_status',
+        'bride_surname',
+        'bride_first_name',
+        'bride_other_names',
+        'bride_dob',
+        'bride_place_of_birth',
+        'bride_occupation',
+        'bride_address',
+        'bride_phone',
+        'bride_email',
+        'bride_state_of_origin',
+        'bride_lga',
+        'bride_father_name',
+        'bride_mother_name',
+        'bride_marital_status',
+        'proposed_marriage_date',
+        'proposed_venue',
+        'marriage_type',
+        'witness1_name',
+        'witness1_address',
+        'witness1_phone',
+        'witness2_name',
+        'witness2_address',
+        'witness2_phone'
+      ];
+    }
+
+    function publicMarriageRequiredKeys() {
+      return [
+        'id',
+        'application_number',
+        'status',
+        'fee_amount',
+        'fee_paid',
+        'submitted_at',
+        'created_at',
+        'updated_at',
+        'groom_surname',
+        'groom_first_name',
+        'groom_dob',
+        'groom_address',
+        'groom_phone',
+        'bride_surname',
+        'bride_first_name',
+        'bride_dob',
+        'bride_address',
+        'bride_phone'
+      ];
+    }
+
+    function isPublicMarriageApplicationCreate() {
+      return request.resource.data.keys().hasOnly(publicMarriageApplicationKeys())
+        && request.resource.data.keys().hasAll(publicMarriageRequiredKeys())
+        && request.resource.data.application_number is string
+        && request.resource.data.status == 'submitted'
+        && request.resource.data.fee_amount == 5000
+        && request.resource.data.fee_paid == 0
+        && request.resource.data.groom_surname is string
+        && request.resource.data.groom_first_name is string
+        && request.resource.data.groom_dob is string
+        && request.resource.data.groom_address is string
+        && request.resource.data.groom_phone is string
+        && request.resource.data.bride_surname is string
+        && request.resource.data.bride_first_name is string
+        && request.resource.data.bride_dob is string
+        && request.resource.data.bride_address is string
+        && request.resource.data.bride_phone is string;
+    }
+
+    function publicServiceRequestKeys() {
+      return [
+        'id',
+        'tracking_number',
+        'service_type',
+        'citizen_name',
+        'citizen_email',
+        'citizen_phone',
+        'citizen_address',
+        'description',
+        'priority',
+        'status',
+        'submitted_at',
+        'created_at',
+        'updated_at'
+      ];
+    }
+
+    function isPublicServiceRequestCreate() {
+      return request.resource.data.keys().hasOnly(publicServiceRequestKeys())
+        && request.resource.data.keys().hasAll([
+          'id',
+          'tracking_number',
+          'service_type',
+          'citizen_name',
+          'citizen_phone',
+          'priority',
+          'status',
+          'submitted_at',
+          'created_at',
+          'updated_at'
+        ])
+        && request.resource.data.tracking_number is string
+        && request.resource.data.service_type is string
+        && request.resource.data.citizen_name is string
+        && request.resource.data.citizen_phone is string
+        && request.resource.data.priority in ['low', 'normal', 'high', 'urgent']
+        && request.resource.data.status == 'pending';
+    }
+
+    function isPublicServiceStatusHistoryCreate() {
+      return request.resource.data.keys().hasOnly([
+          'id',
+          'request_id',
+          'request_type',
+          'tracking_number',
+          'old_status',
+          'new_status',
+          'notes',
+          'created_at',
+          'updated_at'
+        ])
+        && request.resource.data.keys().hasAll([
+          'id',
+          'request_id',
+          'request_type',
+          'tracking_number',
+          'old_status',
+          'new_status',
+          'notes',
+          'created_at',
+          'updated_at'
+        ])
+        && request.resource.data.request_id is string
+        && request.resource.data.request_type == 'service_request'
+        && request.resource.data.tracking_number is string
+        && request.resource.data.old_status == null
+        && request.resource.data.new_status == 'pending'
+        && request.resource.data.notes == 'Request submitted by citizen';
+    }
+
+    function isPublicMarriageTrackingCreate(applicationNumber) {
+      return request.resource.data.keys().hasOnly([
+          'application_number',
+          'status',
+          'groom_first_name',
+          'groom_surname',
+          'bride_first_name',
+          'bride_surname',
+          'proposed_marriage_date',
+          'fee_amount',
+          'fee_paid',
+          'submitted_at',
+          'reviewed_at',
+          'approved_at',
+          'certificate_number',
+          'certificate_issued_at',
+          'rejection_reason'
+        ])
+        && request.resource.data.application_number == applicationNumber
+        && request.resource.data.status == 'submitted'
+        && request.resource.data.fee_amount == 5000
+        && request.resource.data.fee_paid == 0;
+    }
+
+    function isPublicServiceTrackingCreate(trackingNumber) {
+      return request.resource.data.keys().hasOnly(['request', 'history', 'updated_at'])
+        && request.resource.data.request is map
+        && request.resource.data.history is list
+        && request.resource.data.request.keys().hasOnly([
+          'tracking_number',
+          'service_type',
+          'status',
+          'priority',
+          'submitted_at',
+          'resolved_at'
+        ])
+        && request.resource.data.request.tracking_number == trackingNumber
+        && request.resource.data.request.status == 'pending';
+    }
+
+    match /departments/{document=**} {
+      allow read: if true;
+      allow write: if canManageStaff();
+    }
+
+    match /cms_articles/{document=**} {
+      allow read: if true;
+      allow write: if canManageCms();
+    }
+
+    match /cms_announcements/{document=**} {
+      allow read: if true;
+      allow write: if canManageCms();
+    }
+
+    match /cms_projects/{document=**} {
+      allow read: if true;
+      allow write: if canManageCms();
+    }
+
+    match /marriage_applications/{document=**} {
+      allow create: if isPublicMarriageApplicationCreate();
+      allow read, update: if canProcessApplications();
+      allow delete: if hasRole(['super_admin']);
+    }
+
+    match /service_requests/{document=**} {
+      allow create: if isPublicServiceRequestCreate();
+      allow read, update: if canProcessServiceRequests();
+      allow delete: if hasRole(['super_admin']);
+    }
+
+    match /status_history/{document=**} {
+      allow create: if isPublicServiceStatusHistoryCreate() || canProcessServiceRequests();
+      allow read: if canProcessServiceRequests();
+      allow update, delete: if hasRole(['super_admin']);
+    }
+
+    match /public_marriage_tracking/{applicationNumber} {
+      allow read: if true;
+      allow create: if isPublicMarriageTrackingCreate(applicationNumber);
+      allow update: if canProcessApplications();
+      allow delete: if hasRole(['super_admin']);
+    }
+
+    match /public_service_tracking/{trackingNumber} {
+      allow read: if true;
+      allow create: if isPublicServiceTrackingCreate(trackingNumber);
+      allow update: if canProcessServiceRequests();
+      allow delete: if hasRole(['super_admin']);
+    }
+
+    match /staff_users/{document=**} {
+      allow read: if isActiveStaff()
+        || (signedIn() && resource.data.mocha_user_id == request.auth.uid);
+      allow create: if signedIn()
+        && request.resource.data.mocha_user_id == request.auth.uid
+        && request.resource.data.role == 'citizen';
+      allow update: if hasRole(['super_admin']);
+      allow delete: if hasRole(['super_admin']);
+    }
+
+    match /staff_by_uid/{uid} {
+      allow read: if signedIn() && (request.auth.uid == uid || canManageStaff());
+      allow create: if signedIn()
+        && request.auth.uid == uid
+        && request.resource.data.role == 'citizen'
+        && request.resource.data.is_active == true;
+      allow update, delete: if hasRole(['super_admin']);
+    }
+
+    match /audit_logs/{document=**} {
+      allow create: if hasRole(['super_admin', 'chairman', 'lcda_secretary', 'hod', 'department_staff', 'digital_champion']);
+      allow read: if hasRole(['super_admin', 'chairman', 'lcda_secretary']);
+      allow update, delete: if hasRole(['super_admin']);
+    }
+  }
+}

@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Nigerian Government Theme - Green, White, Gold */
+    --background: 0 0% 100%;
+    --foreground: 150 25% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 150 25% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 150 25% 12%;
+    --primary: 145 63% 32%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 43 74% 49%;
+    --secondary-foreground: 150 25% 12%;
+    --muted: 140 15% 95%;
+    --muted-foreground: 150 10% 40%;
+    --accent: 43 74% 49%;
+    --accent-foreground: 150 25% 12%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 140 15% 88%;
+    --input: 140 15% 88%;
+    --ring: 145 63% 32%;
+    --radius: 0.5rem;
+    
+    /* Chart colors - green spectrum */
+    --chart-1: 145 63% 32%;
+    --chart-2: 145 55% 42%;
+    --chart-3: 43 74% 49%;
+    --chart-4: 43 65% 55%;
+    --chart-5: 145 40% 52%;
+    
+    /* Sidebar */
+    --sidebar: 150 20% 98%;
+    --sidebar-foreground: 150 25% 12%;
+    --sidebar-primary: 145 63% 32%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 140 15% 95%;
+    --sidebar-accent-foreground: 150 25% 12%;
+    --sidebar-border: 140 15% 88%;
+    --sidebar-ring: 145 63% 32%;
+  }
+
+  .dark {
+    --background: 150 25% 8%;
+    --foreground: 0 0% 98%;
+    --card: 150 20% 12%;
+    --card-foreground: 0 0% 98%;
+    --popover: 150 20% 12%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 145 55% 42%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 43 65% 45%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 150 15% 18%;
+    --muted-foreground: 140 10% 60%;
+    --accent: 43 65% 45%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72.2% 50.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 100% / 12%;
+    --input: 0 0% 100% / 15%;
+    --ring: 145 55% 42%;
+    --chart-1: 145 55% 45%;
+    --chart-2: 145 50% 55%;
+    --chart-3: 43 65% 50%;
+    --chart-4: 43 55% 60%;
+    --chart-5: 145 45% 60%;
+    --sidebar: 150 20% 10%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 145 55% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 150 15% 18%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 100% / 12%;
+    --sidebar-ring: 145 55% 42%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: "Inter Variable", "Inter", system-ui, sans-serif;
+  }
+
+  button:not([disabled]),
+  [role="button"]:not([disabled]) {
+    cursor: pointer;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
+}

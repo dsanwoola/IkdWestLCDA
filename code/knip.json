@@ -1,0 +1,19 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "src/react-app/main.tsx",
+    "../scripts/*.mjs"
+  ],
+  "project": [
+    "src/**/*.{ts,tsx}",
+    "../scripts/**/*.{js,mjs}"
+  ],
+  "ignore": [
+    "src/react-app/components/ui/**/*.tsx",
+    "src/react-app/vite-env.d.ts"
+  ],
+  "ignoreDependencies": [
+    "firebase-admin",
+    "firebase-tools"
+  ]
+}
