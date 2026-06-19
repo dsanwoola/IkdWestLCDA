@@ -51,9 +51,9 @@ export default function Header() {
 
   return (
     <>
-      {/* Top Bar */}
-      <div className="bg-primary text-primary-foreground text-xs sm:text-sm py-2">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row sm:flex-wrap sm:justify-between sm:items-center gap-2">
+      {/* Top Bar - desktop/tablet only so mobile starts with the logo header */}
+      <div className="hidden bg-primary py-2 text-sm text-primary-foreground md:block">
+        <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-between items-center gap-2">
           <div className="flex items-center gap-x-4 gap-y-1 flex-wrap">
             <a href="tel:+2341234567890" className="flex min-h-8 items-center gap-1.5 hover:opacity-80 transition-opacity">
               <Phone className="w-3.5 h-3.5" />
