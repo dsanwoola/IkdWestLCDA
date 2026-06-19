@@ -22,6 +22,9 @@ if (missingConfig.length > 0) {
 const firebaseApp = initializeApp(firebaseConfig);
 export const auth = getAuth(firebaseApp);
 export const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({
+  prompt: "select_account",
+});
 export const db = getFirestore(firebaseApp);
 
 if (import.meta.env.VITE_USE_FIREBASE_EMULATORS === "true") {

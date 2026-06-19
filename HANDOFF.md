@@ -66,9 +66,12 @@ npm run firebase:deploy:hosting
 - `npm run build`: passed.
 - `npm run api:verify`: passed.
 - `npm run firebase:verify-live`: passed; live Firestore has 4 `staff_users`, 4 `staff_by_uid`, and 8 `departments`.
+- Firebase Auth providers: Email/password and Google sign-in deployed/enabled.
+- Firebase Auth authorized domains: `ikorodu-west-lcda.firebaseapp.com`, `ikorodu-west-lcda.web.app`, `ikoroduwestlcda.com`, and `www.ikoroduwestlcda.com`.
+- Staff Portal Google sign-in UI includes visible loading/error handling and Google account selection prompt.
 - Firestore rules deploy: complete.
 - Hosting deploy: complete.
-- Live URL smoke checks: `/`, `/about`, `/services`, `/staff`, and `/contact` return HTTP 200 and render in headless Chrome.
+- Live URL smoke checks: `/`, `/about`, `/services`, `/staff`, `/staff/login`, and `/contact` return HTTP 200; `/staff/login` renders the Staff Portal login with Google button in headless Chrome.
 
 ## Live Smoke Checklist
 

@@ -57,10 +57,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isPending, setIsPending] = useState(true);
 
   useEffect(() => {
-    return onAuthStateChanged(auth, (nextUser) => {
+    const authReadyFallback = window.setTimeout(() => {
+      setIsPending(false);
+    }, 6000);
+
+    const unsubscribe = onAuthStateChanged(auth, (nextUser) => {
+      window.clearTimeout(authReadyFallback);
       setFirebaseUser(nextUser);
       setIsPending(false);
     });
+
+    return () => {
+      window.clearTimeout(authReadyFallback);
+      unsubscribe();
+    };
   }, []);
 
   const redirectToLogin = useCallback(async () => {
