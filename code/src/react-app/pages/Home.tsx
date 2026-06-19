@@ -131,7 +131,7 @@ export default function Home() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+      <section className="relative flex min-h-[78vh] items-center overflow-hidden sm:min-h-[85vh]">
         {/* Background */}
         <div className="absolute inset-0">
           <div 
@@ -145,38 +145,38 @@ style={{
         </div>
 
         {/* Decorative elements */}
-        <div className="absolute top-20 right-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" />
+        <div className="absolute top-20 right-10 h-40 w-40 rounded-full bg-primary/20 blur-3xl sm:h-72 sm:w-72" />
+        <div className="absolute bottom-20 left-10 h-56 w-56 rounded-full bg-secondary/10 blur-3xl sm:h-96 sm:w-96" />
 
         {/* Content */}
-        <div className="relative max-w-7xl mx-auto px-4 py-20 w-full">
+        <div className="relative mx-auto w-full max-w-7xl px-4 py-12 sm:py-20">
           <div className="max-w-3xl">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-8 border border-white/20">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-sm sm:mb-8">
               <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
               <span className="text-sm text-white/90">Official Government Portal</span>
             </div>
 
             {/* Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
+            <h1 className="mb-5 text-balance text-3xl font-bold leading-tight text-white sm:mb-6 sm:text-5xl lg:text-6xl" style={{ fontFamily: 'Playfair Display, serif' }}>
               Ikorodu West
               <span className="block text-secondary">Local Council Development Area</span>
             </h1>
 
-            <p className="text-xl text-white/80 mb-8 max-w-2xl leading-relaxed" style={{ fontFamily: 'Source Sans 3, sans-serif' }}>
+            <p className="mb-8 max-w-2xl text-base leading-relaxed text-white/80 sm:text-xl" style={{ fontFamily: 'Source Sans 3, sans-serif' }}>
               Serving the people of Ikorodu with transparency, accountability, and a commitment 
               to sustainable development. Building a better community together.
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-4">
-              <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white px-8 h-14 text-lg">
+            <div className="grid gap-3 sm:flex sm:flex-wrap sm:gap-4">
+              <Button asChild size="lg" className="h-12 w-full bg-primary px-6 text-base text-white hover:bg-primary/90 sm:h-14 sm:w-auto sm:px-8 sm:text-lg">
                 <Link to="/services">
                   Explore Services
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20 px-8 h-14 text-lg backdrop-blur-sm">
+              <Button asChild size="lg" variant="outline" className="h-12 w-full border-white/30 bg-white/10 px-6 text-base text-white backdrop-blur-sm hover:bg-white/20 sm:h-14 sm:w-auto sm:px-8 sm:text-lg">
                 <Link to="/services/request">
                   Report an Issue
                 </Link>
@@ -184,14 +184,14 @@ style={{
             </div>
 
             {/* Quick stats */}
-            <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-16 sm:gap-6 md:grid-cols-4">
               {stats.map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-white/10 rounded-xl mb-3">
+                <div key={stat.label} className="rounded-2xl bg-white/5 p-3 text-center backdrop-blur-sm sm:bg-transparent sm:p-0">
+                  <div className="mb-2 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 sm:mb-3 sm:h-12 sm:w-12">
                     <stat.icon className="w-6 h-6 text-secondary" />
                   </div>
-                  <div className="text-3xl font-bold text-white">{stat.value}</div>
-                  <div className="text-sm text-white/60">{stat.label}</div>
+                  <div className="text-2xl font-bold text-white sm:text-3xl">{stat.value}</div>
+                  <div className="text-xs text-white/70 sm:text-sm sm:text-white/60">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -199,7 +199,7 @@ style={{
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 animate-bounce sm:block">
           <div className="w-8 h-12 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
             <div className="w-1.5 h-3 bg-white/50 rounded-full animate-pulse" />
           </div>
@@ -207,9 +207,9 @@ style={{
       </section>
 
       {/* Core Values Section */}
-      <section className="py-16 bg-gradient-to-b from-muted/50 to-background">
+      <section className="bg-gradient-to-b from-muted/50 to-background py-10 sm:py-16">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 gap-4 min-[420px]:grid-cols-2 md:grid-cols-4 md:gap-6">
             {coreValues.map((value) => (
               <div key={value.title} className="text-center group">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-2xl mb-4 group-hover:bg-primary/20 transition-colors">
@@ -224,11 +224,11 @@ style={{
       </section>
 
       {/* Services Section */}
-      <section className="py-20">
+      <section className="py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-14">
+          <div className="mb-10 text-center sm:mb-14">
             <span className="text-primary font-semibold text-sm uppercase tracking-wider">What We Offer</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
+            <h2 className="mt-2 mb-4 text-2xl font-bold sm:text-3xl md:text-4xl" style={{ fontFamily: 'Playfair Display, serif' }}>
               Citizen Services
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -258,7 +258,7 @@ style={{
           </div>
 
           <div className="text-center mt-10">
-            <Button asChild size="lg" variant="outline" className="px-8">
+            <Button asChild size="lg" variant="outline" className="w-full px-8 sm:w-auto">
               <Link to="/services">
                 View All Services
                 <ArrowRight className="ml-2 w-4 h-4" />
@@ -269,7 +269,7 @@ style={{
       </section>
 
       {/* Chairman's Message Section */}
-      <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+      <section className="bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="relative">
@@ -280,7 +280,7 @@ style={{
                   alt="Chairman"
                   className="rounded-2xl shadow-2xl w-full max-w-md mx-auto"
                 />
-                <div className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-xl p-4 max-w-xs">
+                <div className="absolute inset-x-4 -bottom-6 rounded-xl bg-white p-4 shadow-xl sm:inset-x-auto sm:-right-6 sm:max-w-xs">
                   <p className="text-sm text-muted-foreground italic">
                     "Building a prosperous Ikorodu West through inclusive governance"
                   </p>
@@ -303,14 +303,14 @@ style={{
                 in digital infrastructure to bring government services closer to our people. 
                 Together, we are building a model local government that works for everyone.
               </p>
-              <div className="flex items-center gap-4 mb-8">
+              <div className="mb-8 flex items-start gap-4">
                 <div className="w-12 h-0.5 bg-secondary" />
                 <div>
                   <p className="font-semibold text-foreground">Hon. Otunba Suliamon Kazeem Olarewaju FCA, FCTI</p>
                   <p className="text-sm text-muted-foreground">Executive Chairman, Ikorodu West LCDA</p>
                 </div>
               </div>
-              <Button asChild className="bg-primary hover:bg-primary/90">
+              <Button asChild className="w-full bg-primary hover:bg-primary/90 sm:w-auto">
                 <Link to="/chairman">
                   Visit Chairman's Office
                   <ArrowRight className="ml-2 w-4 h-4" />
@@ -322,16 +322,16 @@ style={{
       </section>
 
       {/* Projects Section */}
-      <section className="py-20">
+      <section className="py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div>
               <span className="text-primary font-semibold text-sm uppercase tracking-wider">Development</span>
-              <h2 className="text-3xl md:text-4xl font-bold mt-2" style={{ fontFamily: 'Playfair Display, serif' }}>
+              <h2 className="mt-2 text-2xl font-bold sm:text-3xl md:text-4xl" style={{ fontFamily: 'Playfair Display, serif' }}>
                 Ongoing Projects
               </h2>
             </div>
-            <Button asChild variant="outline" className="mt-4 md:mt-0">
+            <Button asChild variant="outline" className="mt-4 w-full md:mt-0 md:w-auto">
               <Link to="/projects">
                 View All Projects
                 <ArrowRight className="ml-2 w-4 h-4" />
@@ -376,16 +376,16 @@ style={{
       </section>
 
       {/* News Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="bg-muted/30 py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div>
               <span className="text-primary font-semibold text-sm uppercase tracking-wider">Stay Updated</span>
-              <h2 className="text-3xl md:text-4xl font-bold mt-2" style={{ fontFamily: 'Playfair Display, serif' }}>
+              <h2 className="mt-2 text-2xl font-bold sm:text-3xl md:text-4xl" style={{ fontFamily: 'Playfair Display, serif' }}>
                 Latest News & Announcements
               </h2>
             </div>
-            <Button asChild variant="outline" className="mt-4 md:mt-0">
+            <Button asChild variant="outline" className="mt-4 w-full md:mt-0 md:w-auto">
               <Link to="/news">
                 All News
                 <ArrowRight className="ml-2 w-4 h-4" />
@@ -439,27 +439,27 @@ style={{
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-primary/90 text-white relative overflow-hidden">
+      <section className="relative overflow-hidden bg-gradient-to-r from-primary to-primary/90 py-14 text-white sm:py-20">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full -translate-x-1/2 -translate-y-1/2" />
           <div className="absolute bottom-0 right-0 w-72 h-72 bg-secondary rounded-full translate-x-1/3 translate-y-1/3" />
         </div>
         <div className="max-w-4xl mx-auto px-4 text-center relative">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
+          <h2 className="mb-6 text-balance text-2xl font-bold sm:text-3xl md:text-4xl" style={{ fontFamily: 'Playfair Display, serif' }}>
             Have an Issue to Report?
           </h2>
-          <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="mx-auto mb-8 max-w-2xl text-base text-white/80 sm:text-lg">
             Our citizen service portal allows you to submit requests, report issues, 
             and track the status of your submissions in real-time.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90 px-8">
+          <div className="grid justify-center gap-3 sm:flex sm:flex-wrap sm:gap-4">
+            <Button asChild size="lg" className="w-full bg-white px-8 text-primary hover:bg-white/90 sm:w-auto">
               <Link to="/services/request">
                 Submit a Request
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 px-8">
+            <Button asChild size="lg" variant="outline" className="w-full border-white/30 px-8 text-white hover:bg-white/10 sm:w-auto">
               <Link to="/services/track">
                 Track Your Request
               </Link>
@@ -469,11 +469,11 @@ style={{
       </section>
 
       {/* Events/Calendar Section */}
-      <section className="py-20">
+      <section className="py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <span className="text-primary font-semibold text-sm uppercase tracking-wider">Community</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
+            <h2 className="mt-2 mb-4 text-2xl font-bold sm:text-3xl md:text-4xl" style={{ fontFamily: 'Playfair Display, serif' }}>
               Upcoming Events
             </h2>
           </div>
@@ -501,7 +501,7 @@ style={{
             ].map((event, idx) => (
               <Card key={idx} className="group hover:border-primary/50 transition-colors">
                 <CardContent className="p-6">
-                  <div className="flex gap-4">
+                  <div className="flex gap-3 sm:gap-4">
                     <div className="w-16 h-16 bg-primary/10 rounded-xl flex flex-col items-center justify-center flex-shrink-0">
                       <span className="text-2xl font-bold text-primary">
                         {new Date(event.date).getDate()}

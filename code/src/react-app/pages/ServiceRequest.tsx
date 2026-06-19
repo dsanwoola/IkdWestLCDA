@@ -200,23 +200,23 @@ export default function ServiceRequestPage() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative py-16 bg-gradient-to-br from-primary via-primary/95 to-primary/90 text-white overflow-hidden">
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-primary/90 py-10 text-white sm:py-16">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-72 h-72 bg-secondary rounded-full translate-y-1/2 -translate-x-1/2" />
         </div>
         <div className="max-w-7xl mx-auto px-4 relative">
-          <nav className="flex items-center gap-2 text-white/70 text-sm mb-6">
+          <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-white/70">
             <Link to="/" className="hover:text-white transition-colors">Home</Link>
             <span>/</span>
             <Link to="/services" className="hover:text-white transition-colors">Services</Link>
             <span>/</span>
             <span className="text-white">Submit Request</span>
           </nav>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
+          <h1 className="mb-4 text-balance text-3xl font-bold sm:text-4xl md:text-5xl" style={{ fontFamily: 'Playfair Display, serif' }}>
             Service Request Portal
           </h1>
-          <p className="text-xl text-white/80 leading-relaxed max-w-3xl">
+          <p className="max-w-3xl text-base leading-relaxed text-white/80 sm:text-xl">
             Submit your service request online and track its progress. Our team will 
             review and respond within 3-5 business days.
           </p>
@@ -224,29 +224,29 @@ export default function ServiceRequestPage() {
       </section>
 
       {/* Tab Navigation */}
-      <section className="bg-white border-b sticky top-0 z-20">
+      <section className="sticky top-0 z-20 border-b bg-white">
         <div className="max-w-3xl mx-auto px-4">
-          <div className="flex">
+          <div className="grid grid-cols-2">
             <button
               onClick={() => setActiveTab('submit')}
-              className={`flex-1 py-4 text-center font-medium border-b-2 transition-colors ${
+              className={`min-h-12 px-2 py-3 text-center text-sm font-medium border-b-2 transition-colors sm:py-4 sm:text-base ${
                 activeTab === 'submit'
                   ? 'border-primary text-primary'
                   : 'border-transparent text-muted-foreground hover:text-foreground'
               }`}
             >
-              <Send className="w-4 h-4 inline-block mr-2" />
-              Submit New Request
+              <Send className="mr-1 inline-block h-4 w-4 sm:mr-2" />
+              <span className="hidden min-[380px]:inline">Submit New </span>Request
             </button>
             <button
               onClick={() => setActiveTab('track')}
-              className={`flex-1 py-4 text-center font-medium border-b-2 transition-colors ${
+              className={`min-h-12 px-2 py-3 text-center text-sm font-medium border-b-2 transition-colors sm:py-4 sm:text-base ${
                 activeTab === 'track'
                   ? 'border-primary text-primary'
                   : 'border-transparent text-muted-foreground hover:text-foreground'
               }`}
             >
-              <Search className="w-4 h-4 inline-block mr-2" />
+              <Search className="mr-1 inline-block h-4 w-4 sm:mr-2" />
               Track Request
             </button>
           </div>
@@ -254,13 +254,13 @@ export default function ServiceRequestPage() {
       </section>
 
       {/* Main Content */}
-      <section className="py-12 bg-muted/30">
+      <section className="bg-muted/30 py-8 sm:py-12">
         <div className="max-w-3xl mx-auto px-4">
           {activeTab === 'submit' ? (
             submitSuccess ? (
               // Success State
               <Card className="border-0 shadow-lg">
-                <CardContent className="p-8 text-center">
+                <CardContent className="p-5 text-center sm:p-8">
                   <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                     <CheckCircle className="w-10 h-10 text-green-600" />
                   </div>
@@ -272,10 +272,10 @@ export default function ServiceRequestPage() {
                     to check the status of your request.
                   </p>
                   
-                  <div className="bg-primary/5 border border-primary/20 rounded-xl p-6 mb-6">
+                  <div className="mb-6 rounded-xl border border-primary/20 bg-primary/5 p-4 sm:p-6">
                     <div className="text-sm text-muted-foreground mb-2">Your Tracking Number</div>
-                    <div className="flex items-center justify-center gap-3">
-                      <span className="text-2xl font-mono font-bold text-primary">{submitSuccess}</span>
+                    <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+                      <span className="break-all font-mono text-xl font-bold text-primary sm:text-2xl">{submitSuccess}</span>
                       <Button
                         variant="outline"
                         size="sm"
@@ -324,7 +324,7 @@ export default function ServiceRequestPage() {
             ) : (
               // Submit Form
               <Card className="border-0 shadow-lg">
-                <CardContent className="p-6 md:p-8">
+                <CardContent className="p-4 sm:p-6 md:p-8">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
                       <ClipboardList className="w-6 h-6 text-primary" />
@@ -343,13 +343,13 @@ export default function ServiceRequestPage() {
                       <Label className="text-base font-semibold mb-3 block">
                         What service do you need? <span className="text-red-500">*</span>
                       </Label>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                      <div className="grid grid-cols-1 gap-3 min-[430px]:grid-cols-2 md:grid-cols-4">
                         {serviceCategories.map((category) => (
                           <button
                             key={category.id}
                             type="button"
                             onClick={() => setSelectedCategory(category.id)}
-                            className={`p-3 rounded-xl border-2 text-left transition-all ${
+                            className={`min-h-24 rounded-xl border-2 p-3 text-left transition-all ${
                               selectedCategory === category.id
                                 ? 'border-primary bg-primary/5'
                                 : 'border-gray-200 hover:border-gray-300'
@@ -374,7 +374,7 @@ export default function ServiceRequestPage() {
                         <User className="w-5 h-5 text-primary" />
                         Your Information
                       </h3>
-                      <div className="grid md:grid-cols-2 gap-4">
+                      <div className="grid gap-4 md:grid-cols-2">
                         <div>
                           <Label htmlFor="name">Full Name <span className="text-red-500">*</span></Label>
                           <Input
@@ -382,7 +382,7 @@ export default function ServiceRequestPage() {
                             placeholder="Enter your full name"
                             value={formData.citizen_name}
                             onChange={(e) => handleInputChange('citizen_name', e.target.value)}
-                            className="mt-1"
+                            className="mt-1 h-12"
                           />
                         </div>
                         <div>
@@ -394,7 +394,7 @@ export default function ServiceRequestPage() {
                               placeholder="08012345678"
                               value={formData.citizen_phone}
                               onChange={(e) => handleInputChange('citizen_phone', e.target.value)}
-                              className="pl-10"
+                              className="h-12 pl-10"
                             />
                           </div>
                         </div>
@@ -408,7 +408,7 @@ export default function ServiceRequestPage() {
                               placeholder="your@email.com (optional)"
                               value={formData.citizen_email}
                               onChange={(e) => handleInputChange('citizen_email', e.target.value)}
-                              className="pl-10"
+                              className="h-12 pl-10"
                             />
                           </div>
                         </div>
@@ -421,7 +421,7 @@ export default function ServiceRequestPage() {
                               placeholder="Your residential address"
                               value={formData.citizen_address}
                               onChange={(e) => handleInputChange('citizen_address', e.target.value)}
-                              className="pl-10"
+                              className="h-12 pl-10"
                             />
                           </div>
                         </div>
@@ -443,13 +443,13 @@ export default function ServiceRequestPage() {
                           placeholder="Please provide details about your service request. Include any relevant information that will help us process your request faster."
                           value={formData.description}
                           onChange={(e) => handleInputChange('description', e.target.value)}
-                          className="mt-1 min-h-[120px]"
+                          className="mt-1 min-h-[140px]"
                         />
                       </div>
                       
                       <div className="mt-4">
                         <Label>Priority Level</Label>
-                        <div className="flex gap-3 mt-2">
+                        <div className="mt-2 grid gap-3 sm:grid-cols-2">
                           {[
                             { value: 'normal', label: 'Normal', desc: 'Standard processing' },
                             { value: 'high', label: 'Urgent', desc: 'Expedited review' }
@@ -458,7 +458,7 @@ export default function ServiceRequestPage() {
                               key={option.value}
                               type="button"
                               onClick={() => handleInputChange('priority', option.value)}
-                              className={`flex-1 p-3 rounded-lg border-2 text-left transition-all ${
+                              className={`min-h-20 rounded-lg border-2 p-3 text-left transition-all ${
                                 formData.priority === option.value
                                   ? 'border-primary bg-primary/5'
                                   : 'border-gray-200 hover:border-gray-300'
@@ -486,7 +486,7 @@ export default function ServiceRequestPage() {
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full gap-2"
+                      className="h-12 w-full gap-2"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? (
@@ -509,7 +509,7 @@ export default function ServiceRequestPage() {
             // Track Tab
             <div className="space-y-6">
               <Card className="border-0 shadow-lg">
-                <CardContent className="p-6 md:p-8">
+                <CardContent className="p-4 sm:p-6 md:p-8">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
                       <Search className="w-6 h-6 text-primary" />
@@ -566,7 +566,7 @@ export default function ServiceRequestPage() {
               {/* Tracked Request Result */}
               {trackedRequest && status && (
                 <Card className="border-0 shadow-lg animate-in fade-in slide-in-from-top-4">
-                  <CardContent className="p-6 md:p-8">
+                  <CardContent className="p-4 sm:p-6 md:p-8">
                     <div className="flex items-start justify-between mb-6">
                       <div>
                         <div className="text-sm text-muted-foreground mb-1">Tracking Number</div>

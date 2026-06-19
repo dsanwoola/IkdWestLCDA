@@ -52,19 +52,19 @@ export default function Header() {
   return (
     <>
       {/* Top Bar */}
-      <div className="bg-primary text-primary-foreground text-sm py-2">
-        <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-between items-center gap-2">
-          <div className="flex items-center gap-6 flex-wrap">
-            <a href="tel:+2341234567890" className="flex items-center gap-1.5 hover:opacity-80 transition-opacity">
+      <div className="bg-primary text-primary-foreground text-xs sm:text-sm py-2">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row sm:flex-wrap sm:justify-between sm:items-center gap-2">
+          <div className="flex items-center gap-x-4 gap-y-1 flex-wrap">
+            <a href="tel:+2341234567890" className="flex min-h-8 items-center gap-1.5 hover:opacity-80 transition-opacity">
               <Phone className="w-3.5 h-3.5" />
               <span>+234 123 456 7890</span>
             </a>
-            <a href="mailto:info@ikoroduwestlcda.gov.ng" className="flex items-center gap-1.5 hover:opacity-80 transition-opacity">
+            <a href="mailto:info@ikoroduwestlcda.gov.ng" className="flex min-h-8 items-center gap-1.5 hover:opacity-80 transition-opacity break-all sm:break-normal">
               <Mail className="w-3.5 h-3.5" />
               <span>info@ikoroduwestlcda.gov.ng</span>
             </a>
           </div>
-          <div className="flex items-center gap-1.5">
+          <div className="flex min-h-8 items-center gap-1.5">
             <MapPin className="w-3.5 h-3.5" />
             <span>Ikorodu, Lagos State, Nigeria</span>
           </div>
@@ -80,24 +80,24 @@ export default function Header() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between min-h-16 sm:min-h-20 py-2">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3">
+            <Link to="/" className="flex min-w-0 items-center gap-2 sm:gap-3">
               <img 
                 src="/assets/mocha/ikd-logo.jpg" 
                 alt="Ikorodu Logo" 
-                className="w-12 h-12 rounded-full object-cover shadow-md"
+                className="h-10 w-10 rounded-full object-cover shadow-md sm:h-12 sm:w-12"
               />
               <img 
                 src="/assets/mocha/ikd-west-logo.jpeg" 
                 alt="Ikorodu West LCDA Crest" 
-                className="w-12 h-12 object-contain"
+                className="h-10 w-10 object-contain sm:h-12 sm:w-12"
               />
-              <div className="hidden sm:block">
-                <h1 className="font-bold text-lg text-foreground leading-tight">
+              <div className="min-w-0">
+                <h1 className="max-w-[9rem] truncate text-sm font-bold leading-tight text-foreground sm:max-w-none sm:text-lg">
                   Ikorodu West LCDA
                 </h1>
-                <p className="text-xs text-muted-foreground">
+                <p className="hidden text-xs text-muted-foreground sm:block">
                   Lagos State, Nigeria
                 </p>
               </div>
@@ -152,7 +152,7 @@ export default function Header() {
               
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden p-2 rounded-md hover:bg-muted transition-colors"
+                className="lg:hidden min-h-11 min-w-11 p-2 rounded-md hover:bg-muted transition-colors"
                 aria-label="Toggle menu"
               >
                 {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -164,12 +164,12 @@ export default function Header() {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="lg:hidden border-t bg-white animate-in slide-in-from-top-2 duration-200">
-            <nav className="max-w-7xl mx-auto px-4 py-4 space-y-1">
+            <nav className="max-h-[calc(100dvh-9rem)] max-w-7xl mx-auto overflow-y-auto px-4 py-4 space-y-1 safe-bottom">
               {navigationItems.map((item) => (
                 <div key={item.label}>
                   <Link
                     to={item.href}
-                    className={`block px-4 py-3 rounded-md text-sm font-medium transition-colors ${
+                    className={`block min-h-11 px-4 py-3 rounded-md text-sm font-medium transition-colors ${
                       location.pathname === item.href
                         ? 'text-primary bg-primary/5'
                         : 'text-foreground hover:text-primary hover:bg-primary/5'
@@ -183,7 +183,7 @@ export default function Header() {
                         <Link
                           key={child.label}
                           to={child.href}
-                          className="block px-4 py-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                          className="block min-h-10 px-4 py-2.5 text-sm text-muted-foreground hover:text-primary transition-colors"
                         >
                           {child.label}
                         </Link>

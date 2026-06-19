@@ -224,7 +224,7 @@ export default function StaffDashboardPage() {
               Your account has been registered, but a portal administrator must assign a staff role before you can access staff tools.
             </p>
             <div className="bg-muted/50 rounded-lg p-4 mb-6 text-left">
-              <div className="flex items-center gap-3">
+              <div className="flex min-w-0 items-center gap-2 sm:gap-3">
                 <img
                   src={user.google_user_data?.picture || ''}
                   alt=""
@@ -250,10 +250,10 @@ export default function StaffDashboardPage() {
     <div className="min-h-screen bg-gray-100">
       {/* Sidebar */}
       <aside className={`
-        fixed inset-y-0 left-0 z-50 w-64 bg-white border-r transform transition-transform duration-200 ease-in-out
-        lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+        fixed inset-y-0 left-0 z-50 w-[82vw] max-w-72 transform border-r bg-white transition-transform duration-200 ease-in-out sm:w-72
+        lg:w-64 lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
-        <div className="flex flex-col h-full">
+        <div className="flex h-full flex-col safe-bottom">
           {/* Logo */}
           <div className="p-6 border-b">
             <Link to="/staff" className="flex items-center gap-3">
@@ -277,7 +277,7 @@ export default function StaffDashboardPage() {
                 key={item.label}
                 to={item.href}
                 className={`
-                  flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
+                  flex min-h-11 items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
                   ${item.active ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100'}
                 `}
               >
@@ -302,7 +302,7 @@ export default function StaffDashboardPage() {
                   <Link
                     key={item.label}
                     to={item.href}
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
+                    className="flex min-h-11 items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors"
                   >
                     <item.icon className="w-5 h-5" />
                     {item.label}
@@ -353,12 +353,12 @@ export default function StaffDashboardPage() {
       {/* Main content */}
       <div className="lg:ml-64">
         {/* Top header */}
-        <header className="sticky top-0 z-30 bg-white border-b px-4 lg:px-6 py-3">
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
+        <header className="sticky top-0 z-30 border-b bg-white px-4 py-3 lg:px-6">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex min-w-0 items-center gap-3 sm:gap-4">
               <button 
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="lg:hidden p-2 -ml-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+                className="-ml-2 min-h-11 min-w-11 rounded-lg p-2 text-gray-600 hover:bg-gray-100 lg:hidden"
               >
                 {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
@@ -370,12 +370,12 @@ export default function StaffDashboardPage() {
                 />
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <button className="relative p-2 text-gray-600 hover:bg-gray-100 rounded-lg">
+            <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+              <button className="relative min-h-11 min-w-11 rounded-lg p-2 text-gray-600 hover:bg-gray-100">
                 <Bell className="w-5 h-5" />
                 <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
               </button>
-              <Link to="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <Link to="/" className="hidden text-sm text-muted-foreground transition-colors hover:text-primary min-[420px]:inline">
                 View Public Site
               </Link>
             </div>
@@ -383,13 +383,13 @@ export default function StaffDashboardPage() {
         </header>
 
         {/* Dashboard content */}
-        <main className="p-4 lg:p-6">
+        <main className="p-4 pb-8 lg:p-6">
           {/* Welcome */}
           <div className="mb-6">
-            <h1 className="text-2xl font-bold" style={{ fontFamily: 'Playfair Display, serif' }}>
+            <h1 className="text-balance text-xl font-bold sm:text-2xl" style={{ fontFamily: 'Playfair Display, serif' }}>
               Welcome back, {staffProfile?.full_name?.split(' ')[0] || user.google_user_data?.given_name || 'Staff'}!
             </h1>
-            <p className="text-muted-foreground">
+            <p className="text-sm text-muted-foreground sm:text-base">
               Here's what's happening in Ikorodu West LCDA today.
             </p>
           </div>
@@ -398,7 +398,7 @@ export default function StaffDashboardPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             <Card className="border-0 shadow-sm">
               <CardContent className="p-5">
-                <div className="flex items-center justify-between">
+                <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-sm text-muted-foreground">Pending Requests</p>
                     <p className="text-2xl font-bold mt-1">24</p>
@@ -416,7 +416,7 @@ export default function StaffDashboardPage() {
 
             <Card className="border-0 shadow-sm">
               <CardContent className="p-5">
-                <div className="flex items-center justify-between">
+                <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-sm text-muted-foreground">Resolved This Week</p>
                     <p className="text-2xl font-bold mt-1">156</p>
@@ -434,7 +434,7 @@ export default function StaffDashboardPage() {
 
             <Card className="border-0 shadow-sm">
               <CardContent className="p-5">
-                <div className="flex items-center justify-between">
+                <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-sm text-muted-foreground">Active Projects</p>
                     <p className="text-2xl font-bold mt-1">18</p>
@@ -452,7 +452,7 @@ export default function StaffDashboardPage() {
 
             <Card className="border-0 shadow-sm">
               <CardContent className="p-5">
-                <div className="flex items-center justify-between">
+                <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-sm text-muted-foreground">Staff Online</p>
                     <p className="text-2xl font-bold mt-1">42</p>
@@ -472,9 +472,9 @@ export default function StaffDashboardPage() {
           {/* Recent Activity & Quick Actions */}
           <div className="grid lg:grid-cols-3 gap-6">
             {/* Recent Requests */}
-            <Card className="lg:col-span-2 border-0 shadow-sm">
+            <Card className="border-0 shadow-sm lg:col-span-2">
               <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
+                <div className="flex items-start justify-between gap-3">
                   <CardTitle className="text-lg">Recent Service Requests</CardTitle>
                   <Link to="/staff/requests" className="text-sm text-primary hover:underline">
                     View All
@@ -492,16 +492,16 @@ export default function StaffDashboardPage() {
                   ].map((request) => (
                     <div 
                       key={request.id}
-                      className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                      className="grid gap-3 rounded-lg bg-gray-50 p-3 transition-colors hover:bg-gray-100 sm:flex sm:cursor-pointer sm:items-center sm:justify-between"
                     >
-                      <div className="flex items-center gap-3">
+                      <div className="flex min-w-0 items-center gap-2 sm:gap-3">
                         <div className={`
                           w-2 h-8 rounded-full
                           ${request.priority === 'high' ? 'bg-red-500' : request.priority === 'medium' ? 'bg-amber-500' : 'bg-gray-300'}
                         `} />
-                        <div>
-                          <div className="font-medium text-sm">{request.type}</div>
-                          <div className="text-xs text-muted-foreground">{request.id} • {request.citizen}</div>
+                        <div className="min-w-0">
+                          <div className="text-sm font-medium">{request.type}</div>
+                          <div className="truncate text-xs text-muted-foreground">{request.id} • {request.citizen}</div>
                         </div>
                       </div>
                       <Badge className={
