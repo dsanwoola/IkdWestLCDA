@@ -75,10 +75,6 @@ export default function ChairmanOfficePage() {
                       <span className="text-muted-foreground">Education:</span>
                       <span className="ml-2 font-medium">MBA, University of Lagos</span>
                     </div>
-                    <div>
-                      <span className="text-muted-foreground">Previous Role:</span>
-                      <span className="ml-2 font-medium">Commissioner, Lagos State</span>
-                    </div>
                   </div>
                   <div className="mt-6 pt-6 border-t">
                     <Button asChild className="w-full">
