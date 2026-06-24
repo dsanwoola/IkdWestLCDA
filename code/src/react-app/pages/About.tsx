@@ -202,7 +202,7 @@ export default function AboutPage() {
               <img 
                 src="/assets/mocha/Bilding-New.jpeg"
                 alt="Ikorodu West LCDA new local government building"
-                className="relative h-full w-full rounded-2xl object-cover shadow-2xl"
+                className="relative w-full rounded-2xl object-cover shadow-2xl"
               />
               <div className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-6">
                 <div className="text-4xl font-bold text-primary">20+</div>
