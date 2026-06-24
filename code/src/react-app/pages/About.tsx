@@ -50,16 +50,6 @@ const leadership = [
   },
 ];
 
-// Council members
-const councilMembers = [
-  { name: 'Hon. Kunle Adebanjo', ward: 'Ward 1 - Agric', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop' },
-  { name: 'Hon. Mrs. Adunni Salako', ward: 'Ward 2 - Owutu', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop' },
-  { name: 'Hon. Ibrahim Yusuf', ward: 'Ward 3 - Odogunyan', image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop' },
-  { name: 'Hon. Mrs. Grace Okonkwo', ward: 'Ward 4 - Igbogbo', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop' },
-  { name: 'Hon. Segun Adeoye', ward: 'Ward 5 - Ibeshe', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop' },
-  { name: 'Hon. Mrs. Fatimah Bello', ward: 'Ward 6 - Ijede', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop' },
-];
-
 // Core values
 const coreValues = [
   { icon: Shield, title: 'Resilience', description: 'We persist through challenges with determination, adapting to changing circumstances while maintaining our commitment to serving the community.' },
@@ -660,37 +650,6 @@ export default function AboutPage() {
                   </div>
                 </CardContent>
               </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Council Members */}
-      <section className="py-20 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-14">
-            <span className="text-primary font-semibold text-sm uppercase tracking-wider">Representatives</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
-              Council Members
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Elected representatives serving their respective wards with dedication.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {councilMembers.map((member) => (
-              <div key={member.name} className="text-center group">
-                <div className="relative w-24 h-24 mx-auto mb-4">
-                  <img 
-                    src={member.image} 
-                    alt={member.name}
-                    className="w-full h-full object-cover rounded-full ring-4 ring-white shadow-lg group-hover:ring-primary/50 transition-all"
-                  />
-                </div>
-                <h4 className="font-semibold text-sm mb-1">{member.name}</h4>
-                <p className="text-muted-foreground text-xs">{member.ward}</p>
-              </div>
             ))}
           </div>
         </div>
