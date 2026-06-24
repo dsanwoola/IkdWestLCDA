@@ -71,12 +71,12 @@ export default function Organogram() {
           {/* Vertical line down */}
           <div className="w-0.5 h-8 bg-green-600"></div>
           
-          {/* Three-way split: SLG, Council Manager, Legislative Arm */}
-          <div className="relative w-full max-w-5xl">
+          {/* Administration split: SLG and Council Manager */}
+          <div className="relative w-full max-w-4xl">
             {/* Horizontal line */}
             <div className="absolute top-0 left-1/4 right-1/4 h-0.5 bg-green-600"></div>
             
-            <div className="flex justify-between items-start pt-8 px-4">
+            <div className="flex justify-center items-start gap-8 pt-8 px-4">
               {/* SLG Branch */}
               <div className="flex flex-col items-center w-40">
                 <div className="w-0.5 h-8 bg-green-600 -mt-8"></div>
@@ -126,14 +126,7 @@ export default function Organogram() {
                   </div>
                 </div>
               </div>
-              
-              {/* Legislative Arm Branch */}
-              <div className="flex flex-col items-center w-44">
-                <div className="w-0.5 h-8 bg-green-600 -mt-8"></div>
-                <OrganogramBox title="LEGISLATIVE ARM" level="management" />
-                <div className="w-0.5 h-6 bg-green-500"></div>
-                <OrganogramBox title="CLERK OF THE HOUSE" level="unit" />
-              </div>
+
             </div>
           </div>
         </div>
