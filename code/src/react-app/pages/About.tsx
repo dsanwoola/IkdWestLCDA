@@ -200,9 +200,9 @@ export default function AboutPage() {
             <div className="relative">
               <div className="absolute -top-6 -right-6 w-48 h-48 bg-secondary/20 rounded-full blur-2xl" />
               <img 
-                src="https://images.unsplash.com/photo-1577495508048-b635879837f1?w=600&h=400&fit=crop"
-                alt="Ikorodu Community"
-                className="rounded-2xl shadow-2xl relative"
+                src="/assets/mocha/Bilding-New.jpeg"
+                alt="Ikorodu West LCDA new local government building"
+                className="relative h-full w-full rounded-2xl object-cover shadow-2xl"
               />
               <div className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-6">
                 <div className="text-4xl font-bold text-primary">20+</div>
