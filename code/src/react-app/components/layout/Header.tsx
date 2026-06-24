@@ -82,19 +82,24 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between min-h-16 sm:min-h-20 py-2">
             {/* Logo */}
-            <Link to="/" className="flex min-w-0 items-center gap-2 sm:gap-3">
+            <Link to="/" className="flex min-w-0 items-center gap-1.5 sm:gap-3">
+              <img 
+                src="/assets/mocha/lagos-state-logo.svg" 
+                alt="Lagos State Government Logo" 
+                className="h-9 w-9 shrink-0 object-contain sm:h-12 sm:w-12"
+              />
               <img 
                 src="/assets/mocha/ikd-logo.jpg" 
                 alt="Ikorodu Logo" 
-                className="h-10 w-10 rounded-full object-cover shadow-md sm:h-12 sm:w-12"
+                className="h-9 w-9 shrink-0 rounded-full object-cover shadow-md sm:h-12 sm:w-12"
               />
               <img 
                 src="/assets/mocha/ikd-west-logo.jpeg" 
                 alt="Ikorodu West LCDA Crest" 
-                className="h-10 w-10 object-contain sm:h-12 sm:w-12"
+                className="h-9 w-9 shrink-0 object-contain sm:h-12 sm:w-12"
               />
               <div className="min-w-0">
-                <h1 className="max-w-[9rem] truncate text-sm font-bold leading-tight text-foreground sm:max-w-none sm:text-lg">
+                <h1 className="max-w-[7rem] truncate text-sm font-bold leading-tight text-foreground sm:max-w-none sm:text-lg">
                   Ikorodu West LCDA
                 </h1>
                 <p className="hidden text-xs text-muted-foreground sm:block">
