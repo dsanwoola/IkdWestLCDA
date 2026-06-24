@@ -1,28 +1,13 @@
-import { useState } from 'react';
 import { Link } from 'react-router';
 import { 
   ArrowRight, 
-  Download, 
-  FileText, 
   Image as ImageIcon,
-  Search
 } from 'lucide-react';
 import { Card, CardContent } from '@/react-app/components/ui/card';
 import { Button } from '@/react-app/components/ui/button';
-import { Input } from '@/react-app/components/ui/input';
 import { Badge } from '@/react-app/components/ui/badge';
 import Layout from '@/react-app/components/layout/Layout';
 import Organogram from '@/react-app/components/Organogram';
-
-// Public records
-const publicRecords = [
-  { id: 1, title: 'Annual Budget 2024', category: 'Budget', date: '2023-12-15', size: '2.4 MB', downloads: 1250 },
-  { id: 2, title: 'Q3 2023 Financial Report', category: 'Finance', date: '2023-10-15', size: '1.8 MB', downloads: 890 },
-  { id: 3, title: 'Development Plan 2023-2027', category: 'Planning', date: '2023-06-01', size: '5.2 MB', downloads: 2100 },
-  { id: 4, title: 'Procurement Guidelines', category: 'Procurement', date: '2023-03-10', size: '980 KB', downloads: 650 },
-  { id: 5, title: 'Q2 2023 Financial Report', category: 'Finance', date: '2023-07-15', size: '1.6 MB', downloads: 780 },
-  { id: 6, title: 'Environmental Policy Document', category: 'Policy', date: '2023-05-20', size: '1.2 MB', downloads: 420 },
-];
 
 // Gallery images
 const galleryImages = [
@@ -35,17 +20,6 @@ const galleryImages = [
 ];
 
 export default function ChairmanOfficePage() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-
-  const filteredRecords = publicRecords.filter(record => {
-    const matchesSearch = record.title.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || record.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
-
-  const categories = ['all', ...new Set(publicRecords.map(r => r.category))];
-
   return (
     <Layout>
       {/* Hero Section */}
@@ -215,102 +189,6 @@ export default function ChairmanOfficePage() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Public Records Archive */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-10">
-            <span className="text-primary font-semibold text-sm uppercase tracking-wider">Transparency</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
-              Public Records Archive
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Access official documents, reports, and public records in line with our commitment to transparent governance.
-            </p>
-          </div>
-
-          {/* Search & Filter */}
-          <div className="flex flex-col md:flex-row gap-4 mb-8">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-              <Input 
-                placeholder="Search documents..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
-              />
-            </div>
-            <div className="flex gap-2 flex-wrap">
-              {categories.map((cat) => (
-                <Button
-                  key={cat}
-                  variant={selectedCategory === cat ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setSelectedCategory(cat)}
-                  className="capitalize"
-                >
-                  {cat}
-                </Button>
-              ))}
-            </div>
-          </div>
-
-          {/* Records Table */}
-          <Card className="border-0 shadow-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-muted/50">
-                  <tr>
-                    <th className="text-left p-4 font-medium text-sm">Document</th>
-                    <th className="text-left p-4 font-medium text-sm hidden md:table-cell">Category</th>
-                    <th className="text-left p-4 font-medium text-sm hidden sm:table-cell">Date</th>
-                    <th className="text-left p-4 font-medium text-sm hidden lg:table-cell">Size</th>
-                    <th className="text-left p-4 font-medium text-sm hidden lg:table-cell">Downloads</th>
-                    <th className="text-right p-4 font-medium text-sm">Action</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y">
-                  {filteredRecords.map((record) => (
-                    <tr key={record.id} className="hover:bg-muted/30 transition-colors">
-                      <td className="p-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <FileText className="w-5 h-5 text-primary" />
-                          </div>
-                          <span className="font-medium">{record.title}</span>
-                        </div>
-                      </td>
-                      <td className="p-4 hidden md:table-cell">
-                        <Badge variant="outline">{record.category}</Badge>
-                      </td>
-                      <td className="p-4 text-muted-foreground text-sm hidden sm:table-cell">
-                        {new Date(record.date).toLocaleDateString('en-NG', { 
-                          day: 'numeric',
-                          month: 'short', 
-                          year: 'numeric' 
-                        })}
-                      </td>
-                      <td className="p-4 text-muted-foreground text-sm hidden lg:table-cell">{record.size}</td>
-                      <td className="p-4 hidden lg:table-cell">
-                        <span className="flex items-center gap-1 text-sm text-muted-foreground">
-                          <Download className="w-3.5 h-3.5" />
-                          {record.downloads.toLocaleString()}
-                        </span>
-                      </td>
-                      <td className="p-4 text-right">
-                        <Button size="sm" className="gap-1">
-                          <Download className="w-4 h-4" />
-                          <span className="hidden sm:inline">Download</span>
-                        </Button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </Card>
         </div>
       </section>
 
