@@ -7,47 +7,107 @@ import {
   Award,
   Calendar,
   ArrowRight,
-  Mail,
   Crown
 } from 'lucide-react';
 import { Card, CardContent } from '@/react-app/components/ui/card';
 import { Button } from '@/react-app/components/ui/button';
 import Layout from '@/react-app/components/layout/Layout';
 
-// Leadership data
-const leadership = [
-  {
-    name: 'Hon. Otunba Suliamon Kazeem Olarewaju FCA, FCTI',
-    title: 'Executive Chairman',
-    image: '/assets/mocha/chairman-ikd-west.jpg',
-    bio: 'A seasoned administrator with over 20 years of experience in public service. Committed to transforming Ikorodu West through transparent governance and sustainable development.',
-    email: 'chairman@ikoroduwestlcda.gov.ng',
-    phone: '+234 123 456 7890'
-  },
-  {
-    name: 'Hon. Mrs. Folake Adeyemi',
-    title: 'Vice Chairman',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop',
-    bio: 'A community development expert dedicated to women empowerment and youth development programs across Ikorodu West.',
-    email: 'vicechairman@ikoroduwestlcda.gov.ng',
-    phone: '+234 123 456 7891'
-  },
-  {
-    name: 'Mr. Babatunde Akinsola',
-    title: 'Council Secretary',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop',
-    bio: 'An accomplished legal practitioner ensuring administrative excellence and compliance with all statutory requirements.',
-    email: 'secretary@ikoroduwestlcda.gov.ng',
-    phone: '+234 123 456 7892'
-  },
-  {
-    name: 'Alhaji Rasheed Mustapha',
-    title: 'Treasurer',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop',
-    bio: 'A certified accountant with extensive experience in public finance management and budget administration.',
-    email: 'treasurer@ikoroduwestlcda.gov.ng',
-    phone: '+234 123 456 7893'
-  },
+interface PhotoOrgNodeData {
+  title: string;
+  name?: string;
+  image: string;
+  level: 'executive' | 'management' | 'department' | 'unit';
+}
+
+const PhotoOrgCard = ({ title, name, image, level }: PhotoOrgNodeData) => {
+  const styles = {
+    executive: 'border-green-800 bg-green-800 text-white shadow-xl',
+    management: 'border-green-700 bg-white text-green-900 shadow-lg',
+    department: 'border-green-500 bg-white text-green-900 shadow-md',
+    unit: 'border-green-300 bg-green-50 text-green-800 shadow-sm'
+  };
+
+  const imageSize = level === 'executive' ? 'h-24 w-24' : level === 'management' ? 'h-20 w-20' : 'h-16 w-16';
+
+  return (
+    <div className={`flex min-h-full flex-col items-center rounded-2xl border-2 p-3 text-center transition-all hover:-translate-y-1 hover:shadow-xl ${styles[level]}`}>
+      <img
+        src={image}
+        alt={name ? `${name}, ${title}` : title}
+        className={`${imageSize} rounded-full border-4 border-white object-cover shadow-md`}
+      />
+      {name && <span className="mt-3 text-xs font-semibold leading-tight">{name}</span>}
+      <span className={`${name ? 'mt-1' : 'mt-3'} text-[11px] font-bold uppercase tracking-wide leading-tight ${level === 'executive' ? 'text-white/90' : 'text-green-700'}`}>
+        {title}
+      </span>
+    </div>
+  );
+};
+
+const executiveNode: PhotoOrgNodeData = {
+  title: 'Executive Chairman',
+  name: 'Hon. Otunba Suliamon Kazeem Olarewaju FCA, FCTI',
+  image: '/assets/mocha/chairman-ikd-west.jpg',
+  level: 'executive'
+};
+
+const viceChairmanNode: PhotoOrgNodeData = {
+  title: 'Vice Chairman',
+  image: '/assets/mocha/chair-2.jpeg',
+  level: 'management'
+};
+
+const slgNode: PhotoOrgNodeData = {
+  title: 'SLG',
+  image: '/assets/mocha/chair-3.jpeg',
+  level: 'management'
+};
+
+const supervisorsNode: PhotoOrgNodeData = {
+  title: 'Supervisors',
+  image: '/assets/mocha/Chairman\'s-office.jpeg',
+  level: 'unit'
+};
+
+const councilManagerNode: PhotoOrgNodeData = {
+  title: 'Council Manager',
+  image: '/assets/mocha/hod-clerk-west.jpeg',
+  level: 'management'
+};
+
+const legislativeNode: PhotoOrgNodeData = {
+  title: 'Legislative Arm',
+  image: '/assets/mocha/organogram.jpeg',
+  level: 'management'
+};
+
+const clerkNode: PhotoOrgNodeData = {
+  title: 'Clerk of the House',
+  image: '/assets/mocha/hod-clerk-west.jpeg',
+  level: 'unit'
+};
+
+const departmentNodes: PhotoOrgNodeData[] = [
+  { title: 'Head, Admin & Human Resource Dept.', image: '/assets/mocha/hod-hr-west.jpeg', level: 'department' },
+  { title: 'Head, Finance & Accounts Dept.', image: '/assets/mocha/HOD-FINANCE-IKD-WEST.jpeg', level: 'department' },
+  { title: 'Head, Works & Infrastructure Dept.', image: '/assets/mocha/HOD-work-ikd-west.jpeg', level: 'department' },
+  { title: 'Head, Agric & Social Services Dept.', image: '/assets/mocha/Hod-Agric-west.jpeg', level: 'department' },
+  { title: 'Head, Education & Library Services Dept.', image: '/assets/mocha/Education-1.jpeg', level: 'department' },
+  { title: 'Head, Planning, Budget, Research & Statistics Dept.', image: '/assets/mocha/HOD-du-ikd-west.jpeg', level: 'department' },
+  { title: 'Head, WAPA Dept.', image: '/assets/mocha/hod-wapa-west.jpeg', level: 'department' },
+  { title: 'Head, Primary Healthcare Services Dept.', image: '/assets/mocha/ikd-medical-hod.jpeg', level: 'department' },
+  { title: 'Head, Environmental Services Dept.', image: '/assets/mocha/public-afric-hod-west.JPG', level: 'department' },
+];
+
+const unitNodes: PhotoOrgNodeData[] = [
+  { title: 'Head, Audit Unit', image: '/assets/mocha/HOD-audit-ikd-west.jpeg', level: 'unit' },
+  { title: 'Head, Legal Service Unit', image: '/assets/mocha/ikd-west-legal-hod.jpeg', level: 'unit' },
+  { title: 'Head, Public Affairs Unit', image: '/assets/mocha/public-afric-hod-west.JPG', level: 'unit' },
+  { title: 'Head, Tourism Unit', image: '/assets/mocha/HOD-tourism-ikd-west.jpeg', level: 'unit' },
+  { title: 'Head, ICT Unit', image: '/assets/mocha/hod-ict-west.jpeg', level: 'unit' },
+  { title: 'Head, Procurement Unit', image: '/assets/mocha/area-a-hod-west.jpeg', level: 'unit' },
+  { title: 'Area Officers', image: '/assets/mocha/area-b-hod-west.jpeg', level: 'unit' },
 ];
 
 // Core values
@@ -625,33 +685,81 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {leadership.map((leader) => (
-              <Card key={leader.name} className="group overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all">
-                <div className="relative h-64 overflow-hidden">
-                  <img 
-                    src={leader.image} 
-                    alt={leader.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="font-semibold text-white text-lg">{leader.name}</h3>
-                    <p className="text-secondary text-sm font-medium">{leader.title}</p>
+          <Card className="overflow-hidden border-0 bg-gradient-to-br from-white to-green-50/60 shadow-xl">
+            <CardContent className="p-4 sm:p-6 lg:p-8">
+              <div className="w-full overflow-x-auto pb-4">
+                <div className="min-w-[980px]">
+                  <div className="flex flex-col items-center">
+                    <div className="w-80">
+                      <PhotoOrgCard {...executiveNode} />
+                    </div>
+
+                    <div className="h-8 w-0.5 bg-green-600" />
+
+                    <div className="w-60">
+                      <PhotoOrgCard {...viceChairmanNode} />
+                    </div>
+
+                    <div className="h-8 w-0.5 bg-green-600" />
+
+                    <div className="relative w-full max-w-6xl">
+                      <div className="absolute left-1/4 right-1/4 top-0 h-0.5 bg-green-600" />
+
+                      <div className="flex items-start justify-between gap-6 px-4 pt-8">
+                        <div className="flex w-44 flex-col items-center">
+                          <div className="-mt-8 h-8 w-0.5 bg-green-600" />
+                          <PhotoOrgCard {...slgNode} />
+                          <div className="h-6 w-0.5 bg-green-500" />
+                          <PhotoOrgCard {...supervisorsNode} />
+                        </div>
+
+                        <div className="mx-4 flex flex-1 flex-col items-center">
+                          <div className="-mt-8 h-8 w-0.5 bg-green-600" />
+                          <div className="w-64">
+                            <PhotoOrgCard {...councilManagerNode} />
+                          </div>
+
+                          <div className="h-8 w-0.5 bg-green-600" />
+
+                          <div className="relative w-full">
+                            <div className="absolute left-8 right-8 top-0 h-0.5 bg-green-500" />
+                            <div className="grid grid-cols-3 gap-3 pt-6">
+                              {departmentNodes.map((department) => (
+                                <div key={department.title} className="flex flex-col items-center">
+                                  <div className="-mt-4 h-4 w-0.5 bg-green-500" />
+                                  <PhotoOrgCard {...department} />
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="mt-8 w-full">
+                            <div className="mb-4 flex items-center justify-center gap-2">
+                              <div className="h-0.5 flex-1 bg-green-400" />
+                              <span className="px-3 text-xs font-semibold uppercase tracking-wide text-green-700">Units</span>
+                              <div className="h-0.5 flex-1 bg-green-400" />
+                            </div>
+                            <div className="grid grid-cols-4 gap-2">
+                              {unitNodes.map((unit) => (
+                                <PhotoOrgCard key={unit.title} {...unit} />
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex w-48 flex-col items-center">
+                          <div className="-mt-8 h-8 w-0.5 bg-green-600" />
+                          <PhotoOrgCard {...legislativeNode} />
+                          <div className="h-6 w-0.5 bg-green-500" />
+                          <PhotoOrgCard {...clerkNode} />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <CardContent className="p-5">
-                  <p className="text-muted-foreground text-sm mb-4 line-clamp-3">{leader.bio}</p>
-                  <div className="space-y-2 text-sm">
-                    <a href={`mailto:${leader.email}`} className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-                      <Mail className="w-4 h-4" />
-                      <span className="truncate">{leader.email}</span>
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
